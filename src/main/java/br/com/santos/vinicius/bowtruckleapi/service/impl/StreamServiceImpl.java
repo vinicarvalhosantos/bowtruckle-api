@@ -7,6 +7,7 @@ import br.com.santos.vinicius.bowtruckleapi.service.StreamService;
 import com.github.twitch4j.helix.domain.Game;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StreamServiceImpl implements StreamService {
@@ -21,7 +22,7 @@ public class StreamServiceImpl implements StreamService {
     public StreamInfoModel defineStreamInformations(String streamTitle, String gameId) {
         StreamGame streamGame = this.extractGameInformation(gameId);
 
-        return new StreamInfoModel(streamTitle, streamGame, List.of(streamGame));
+        return new StreamInfoModel(streamTitle, streamGame, new ArrayList<>(List.of(streamGame)));
     }
 
     @Override

@@ -49,6 +49,8 @@ public class StreamSingleton {
         streamInfo.setEndedAt(LocalDateTime.now());
         streamMap.put(LocalDate.now(), streamInfo);
 
+        log.info(streamInfo.toString());
+
         streamInfo = null;
     }
 
@@ -75,14 +77,22 @@ public class StreamSingleton {
         StreamService streamService = new StreamServiceImpl(new StreamGameServiceImpl());
 
         streamInfo = streamService.defineStreamInformations(streamTitle, gameId);
+
+        log.info(streamInfo.toString());
     }
 
     public void changeGame(ChannelChangeGameEvent changeGameEvent) {
-        StreamService streamService = new StreamServiceImpl(new StreamGameServiceImpl());
+        try {
+            StreamService streamService = new StreamServiceImpl(new StreamGameServiceImpl());
 
-        String gameId = changeGameEvent.getGameId();
+            String gameId = changeGameEvent.getGameId();
 
-        streamInfo = streamService.updateGameInStreamInformations(gameId, this.streamInfo);
+            streamInfo = streamService.updateGameInStreamInformations(gameId, this.streamInfo);
+
+            log.info(streamInfo.toString());
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+        }
     }
 
     public void startMainStreamEvents() {

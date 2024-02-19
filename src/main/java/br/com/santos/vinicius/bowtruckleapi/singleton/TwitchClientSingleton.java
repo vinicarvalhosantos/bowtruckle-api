@@ -10,8 +10,11 @@ public class TwitchClientSingleton {
 
     public final TwitchClient client;
 
+    public final String channelId;
+
     private TwitchClientSingleton(TwitchClient client) {
         this.client = client;
+        this.channelId = "36413513";
     }
 
     public static TwitchClientSingleton getInstance() {
@@ -27,11 +30,12 @@ public class TwitchClientSingleton {
         final String clientSecret = System.getenv("TWITCH_CLIENT_SECRET");
         final String accessToken = System.getenv("TWITCH_OAUTH_CLIENT");
         final String channel = "mrfalll";
+        final OAuth2Credential credential = new OAuth2Credential(channel, accessToken);
 
         TwitchClient twitchClient = TwitchClientBuilder.builder()
                 .withClientId(clientId)
                 .withClientSecret(clientSecret)
-                .withDefaultAuthToken(new OAuth2Credential(channel, accessToken))
+                .withDefaultAuthToken(credential)
                 .withEnableChat(true)
                 .withEnableHelix(true)
                 .withEnableEventSocket(true)

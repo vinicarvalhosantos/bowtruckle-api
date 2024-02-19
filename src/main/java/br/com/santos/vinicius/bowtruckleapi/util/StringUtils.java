@@ -1,16 +1,14 @@
 package br.com.santos.vinicius.bowtruckleapi.util;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StreamTitleUtils {
+public class StringUtils {
 
     public static List<String> collectTittles(String titles) {
-        if (titles == null || StringUtils.isAllBlank(titles)) {
+        if (titles == null || org.apache.commons.lang3.StringUtils.isAllBlank(titles)) {
             return new ArrayList<>();
         }
 

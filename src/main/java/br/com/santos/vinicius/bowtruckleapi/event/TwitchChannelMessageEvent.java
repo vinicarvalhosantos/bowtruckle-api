@@ -2,8 +2,10 @@ package br.com.santos.vinicius.bowtruckleapi.event;
 
 import com.github.twitch4j.chat.events.channel.ChannelMessageEvent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class TwitchChannelMessageEvent extends TwitchEvent {
 
     @Override

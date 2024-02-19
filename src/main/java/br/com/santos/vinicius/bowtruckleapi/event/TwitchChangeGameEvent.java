@@ -1,11 +1,12 @@
 package br.com.santos.vinicius.bowtruckleapi.event;
 
-import br.com.santos.vinicius.bowtruckleapi.singleton.StreamSingleton;
 import com.github.twitch4j.events.ChannelChangeGameEvent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 
 @Slf4j
+@Component
 public class TwitchChangeGameEvent extends TwitchEvent {
 
     @Override
@@ -13,10 +14,10 @@ public class TwitchChangeGameEvent extends TwitchEvent {
         super.startListening(this.getClass());
 
         this.eventSubscription = this.eventManager.onEvent(ChannelChangeGameEvent.class, changeGameEvent -> {
-            StreamSingleton stream = StreamSingleton.getInstance();
+
             log.info(String.format("Game changed! (%s)", changeGameEvent.getGameId()));
 
-            stream.changeGame(changeGameEvent);
+            this.streamService.changeGame(changeGameEvent);
         });
     }
 }
